@@ -29,6 +29,10 @@ namespace Vets.Controllers
         // GET: Donos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //d é a variavel que identifica cada um dos registos da tabela Donos, é o d para que identificar a Donos
+            //d.ID identifica o atributo ID, desse registo
+
+            
             if (id == null)
             {
                 return NotFound();
