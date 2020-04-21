@@ -12,7 +12,9 @@ namespace Vets.Models
         {
             Animais = new HashSet<Animais>();
         }
-        
+        /// <summary>
+        /// Identificador do Dono. Será PK na tabela da BD
+        /// </summary>
         [Key]
         public int ID { get; set; }
         [Required(ErrorMessage ="O Nome é de preenchimento obrigatório")]
@@ -20,13 +22,18 @@ namespace Vets.Models
         public string Nome { get; set; }
 
 
-
+        /// <summary>
+        /// Numero de Identificação Fiscal
+        /// </summary>
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")] //o parametro {0} representa o nome do atributo
         [StringLength(9,MinimumLength = 9 ,ErrorMessage = "Deve escrever exatamente {1} algarismos")]
         [RegularExpression("[12567][0-9]{8}",ErrorMessage ="Deve escrever um nº, com 9 algarismos, começando por 1,2,5,6 ou 7")]//[]- valores possiveis {}- numero de ocorrencias
         public string NIF { get; set; }
 
-        //Lista de Animais de um determinado dono
+
+        /// <summary>
+        /// Lista de Animais de um determinado dono
+        /// </summary>
         public ICollection<Animais> Animais { get; set; }
 
     }

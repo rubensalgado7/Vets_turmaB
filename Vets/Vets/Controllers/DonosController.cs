@@ -26,16 +26,23 @@ namespace Vets.Controllers
             return View(await db.Donos.ToListAsync());
         }
 
+
+
+        /// <summary>
+        /// Mostra os detalhes de um Dono
+        /// </summary>
+        /// <param name="id">identiicador do dono a detalhar</param>
+        /// <returns></returns>
         // GET: Donos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            //d é a variavel que identifica cada um dos registos da tabela Donos, é o d para que identificar a Donos
-            //d.ID identifica o atributo ID, desse registo
+            //d é a variavel que identifica cada um dos registos da tabela Donos, é o d para 
 
             
             if (id == null)
             {
-                return NotFound();
+                //Nao foi fornecido o ID
+                return RedirectToAction("Index");
             }
 
             var donos = await db.Donos
@@ -95,7 +102,7 @@ namespace Vets.Controllers
         {
             if (id != donos.ID)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
             if (ModelState.IsValid)
@@ -126,7 +133,7 @@ namespace Vets.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
             var donos = await db.Donos
