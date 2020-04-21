@@ -59,7 +59,7 @@ namespace Vets
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Donos}/{action=Index}/{id?}");
+                    pattern: "{controller=Veterinarios}/{action=Index}/{id?}");
             });
         }
     }
