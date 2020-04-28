@@ -25,6 +25,13 @@ namespace Vets.Controllers
             return View(await _context.Veterinarios.ToListAsync());
         }
 
+        /// <summary>
+        /// Mostra os detalhes de um veterinario
+        /// Se houverem,mostra os detalhes das consultas associadas a ele
+        /// Pesquisa feita em modo 'Eager Loading '
+        /// </summary>
+        /// <param name="id">identificador do veterinario</param>
+        /// <returns></returns>
         // GET: Veterinarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -33,8 +40,32 @@ namespace Vets.Controllers
                 return NotFound();
             }
 
-            var veterinarios = await _context.Veterinarios
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var veterinarios = await _context.Veterinarios.Include(v=>v.Consultas).ThenInclude(a=>a.Animal).ThenInclude(d=>d.Dono).FirstOrDefaultAsync(v => v.ID == id);
+            if (veterinarios == null)
+            {
+                return NotFound();
+            }
+
+            return View(veterinarios);
+        }
+
+        /// <summary>
+        /// Mostra os detalhes de um veterinario
+        /// Se houverem,mostra os detalhes das consultas associadas a ele
+        /// Pesquisa feita em modo 'Lazy Loading'
+        /// </summary>
+        /// <param name="id">identificador do veterinario</param>
+        /// <returns></returns>
+        // GET: Veterinarios/Details/5
+        public async Task<IActionResult> Details2(int? id)
+        {
+          
+
+            var veterinarios = await _context.Veterinarios.FirstOrDefaultAsync(v => v.ID == id);
+            //necessário adicionar o termo 'virtual' aos relacionamentos
+            //necessario adicionar um novo pacote
+            //Install EntityFramework.Proxies
+            //dar ordem ao programa para usar o serviço
             if (veterinarios == null)
             {
                 return NotFound();
@@ -73,12 +104,12 @@ namespace Vets.Controllers
                 return NotFound();
             }
 
-            var veterinarios = await _context.Veterinarios.FindAsync(id);
-            if (veterinarios == null)
+            var veterinario = await _context.Veterinarios.FindAsync(id);
+            if (veterinario == null)
             {
                 return NotFound();
             }
-            return View(veterinarios);
+            return View(veterinario);
         }
 
         // POST: Veterinarios/Edit/5

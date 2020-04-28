@@ -21,11 +21,20 @@ namespace Vets.Models
 
         public string Nome { get; set; }
 
+        /// <summary>
+        /// Numero da Célula Profissional
+        /// </summary>
+        [RegularExpression("vet-[0-9]{5}")]
+        [StringLength(9)]
+        [Display(Name ="Nº de Cédula Profissional")]
         public string NumCedulaProf { get; set; }
 
         public string Fotografia { get; set; }
 
-        //lista das Consultas a que um Veterinario está associado
-        public ICollection<Consultas> Consultas { get; set; }
+        
+        /// <summary>
+        /// lista das Consultas a que um Veterinario está associado
+        /// </summary>
+        public virtual ICollection<Consultas> Consultas { get; set; }
     }
 }
