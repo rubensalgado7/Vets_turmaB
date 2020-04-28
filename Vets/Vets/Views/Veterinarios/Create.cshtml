@@ -1,16 +1,16 @@
 ﻿@model Vets.Models.Veterinarios
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adição de Veterinários";
 }
 
-<h1>Create</h1>
+    <h1>Adição de Veterinários</h1>
 
-<h4>Veterinarios</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -24,6 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Fotografia" class="control-label"></label>
+                <input type="file" name="fotoVet" accept=".jpg,.png" style="color:blue;" />
                 <input asp-for="Fotografia" class="form-control" />
                 <span asp-validation-for="Fotografia" class="text-danger"></span>
             </div>
